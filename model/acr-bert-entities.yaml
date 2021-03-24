@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bert-entity-recognizer-deployment
+  labels:
+    app: bert-entity-recognizer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bert-entity-recognizer
+  template:
+    metadata:
+      labels:
+        app: bert-entity-recognizer
+    spec:
+      containers:
+      - name: bert-entity-recognizer
+        image: mycontainerregistry.azurecr.io/bert-entity-recognizer:v1 
+        ports:
+        - containerPort: 80
