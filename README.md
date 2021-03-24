@@ -6,11 +6,9 @@ Az előtanított BERT modellt (bert-base-multilingual-cased) így a megoldással
 
 Annotált szövegkorpusz a [NerKor](https://github.com/dlt-rilmta/NerKor/tree/main/data/wikipedia/morph) korpuszból általunk válagotatt szövegeket tartalmazza.
 
-1. Futtatás AzureML platformon
+## Futtatás AzureML platformon
 
 Futtatáshoz STANDARD_NC6S_V3 virtuális gépet ajánluk, amin AzureML platformon egy terminált nyitva le tudjuk klónozni ezt a repozitóriumot.
-
-## Konfiguráció
 
 Ekkor a konfigurációt a config.json fájlban találjuk meg. A konfiguráció alapbeállításokkal van beállítva, amit nem szükséges (bár lehet) módosítani egy kész tanításhoz.
 
@@ -22,11 +20,9 @@ python3 run_ner.py config.json
 
 Ekkor a kész modellt, ha másképp nem csináltuk, a model mappába menti a szkript.
 
-2. Feltöltés Azure Kubernetes Service környezetbe
+## Docker képfájl készítése
 
 A model mappa tartalmaz egy alap vázat, amit Docker használata segítségével buildelni tudunk, majd AKS-be feltölteni.
-
-# Docker képfájl készítése
 
 Ha megtörtént a finomhangolás futtatása és megelégszünk a model könyvtárban lévő webes végpont funkcionalitásával, akkor nincs más tennivalónk, mint betallózni terminálból a model könyvtárba és feltelepített [Docker](https://www.docker.com) engine esetén, kiadni a következő parancsot:
 
@@ -36,7 +32,7 @@ docker build -t bert-entity-recognizer:v1 .
 
 Ekkor lokálisan készítettünk egy Docker képfájlt, amit futtatva egy entitásfelismerő webszolgáltatást kapunk.
 
-# Azure Container Registry
+## Azure Container Registry
 
 Ahhoz, hogy deployolni tudjuk a már elkészített képfájlunkat, először fel kell töltenünk "valahova", ami az Azure Container Registry (ACR) szolgáltatása. Innen fogjuk tudni később az AKS klaszterünkből meghívni a képfájlt.
 
@@ -56,7 +52,7 @@ Fontos, hogy ahogy a leírás is mutatja, az "az" paranccsal közben bejelentkez
 
 Ha ezzel megvolnánk, jöhet a következő lépés.
 
-# Azure Kubernetes Service
+## Azure Kubernetes Service
 
 Ezen a ponton érdemes végigböngészni [ezt](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-deploy-cluster) a leírást.
 
